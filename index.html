@@ -1,0 +1,93 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Po.et Browser</title>
+    <meta name="description" content="Browse works on Po.et using a token.">
+    <meta name="author" content="KnowledgeArc">
+
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        article * {
+            display: block;
+        }
+
+        article > h2 {
+            font-size: 1em;
+        }
+
+        article > footer {
+            padding: 1em 0;
+        }
+
+        article > footer > time,
+        article > footer > .tags {
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Po.et Browser</h1>
+
+    <form id="form">
+        <input type="text" name="url" id="url" placeholder="https://api.frost.po.et"/>
+        <input type="text" name="token" id="token" placeholder="token"/>
+        <button id="submit" name="submit">Submit</button>
+    </form>
+
+    <div id="results">
+
+    </div>
+
+    <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="jquery.tmpl.min.js"></script>
+
+    <script id="ititemplate" type="text/x-jquery-tmpl">
+        <article>
+            <h2>${name}</h2>
+            <span>${content}</span>
+            <footer>
+                <time>${dateCreated}</time>
+                <time>${datePublished}</time>
+                <span class="tags">${tags}</span>
+            </footer>
+        </article>
+    </script>
+
+    <script language="javascript" type="text/javascript">
+    $(document).ready(function() {
+        $('#form').on('submit', function(e) {
+            e.preventDefault();
+
+            var url = $("#url").val();
+
+            if (!url) {
+                url = 'https://api.frost.po.et';
+            }
+
+            var token = $("#token").val();
+
+            $.ajax({
+                type: "GET",
+                beforeSend: function(request) {
+                    request.setRequestHeader("token", token);
+                },
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(data) {
+                    $('#results').empty();
+                    $('#ititemplate').tmpl(data).appendTo('#results');
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
