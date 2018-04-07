@@ -35,8 +35,9 @@
 <body>
     <h1>Po.et Browser</h1>
 
+    <p>The Po.et Browser displays your works on the <a href="https://po.et">Po.et</a> ledger using your <a href="https://frost.po.et">Frost API</a>. You will need a valid Frost token to request your works.</p>
+
     <form id="form">
-        <input type="text" name="url" id="url" placeholder="https://api.frost.po.et"/>
         <input type="text" name="token" id="token" placeholder="token"/>
         <button id="submit" name="submit">Submit</button>
     </form>
@@ -65,11 +66,9 @@
         $('#form').on('submit', function(e) {
             e.preventDefault();
 
-            var url = $("#url").val();
+            var url = 'https://api.frost.po.et';
 
-            if (!url) {
-                url = 'https://api.frost.po.et';
-            }
+            url += '/works';
 
             var token = $("#token").val();
 
