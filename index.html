@@ -37,8 +37,12 @@
 
     <p>The Po.et Browser displays your works on the <a href="https://po.et">Po.et</a> ledger using your <a href="https://frost.po.et">Frost API</a>. You will need a valid Frost token to request your works.</p>
 
+    <p>The Po.et Browser commununicates directly with the Frost API so your Frost token is not stored anywhere. However, you should be careful your Frost token and not use it on a public computer or a computer you are not familiar with.</p>
+
+    <!--p>You are submitting your Frost API token directly to the Frost API but you are working with a remote site which you should not trust. Only use your Testnet Frost API token.</p-->
+
     <form id="form">
-        <input type="text" name="token" id="token" placeholder="token"/>
+        <input type="text" name="token" id="token" placeholder="token" autocomplete="off"/>
         <button id="submit" name="submit">Submit</button>
     </form>
 
